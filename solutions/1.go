@@ -1,15 +1,19 @@
 package solutions
 
 import (
+	"fmt"
+	"math"
+	"slices"
 	"strconv"
 	"strings"
 
 	"github.com/julianchong00/aoc2024/utils"
+	"github.com/samber/lo"
 )
 
 func Day1(input *utils.Input) error {
-	arr1 := make([]int64, 0)
-	arr2 := make([]int64, 0)
+	arr1 := make([]int, 0)
+	arr2 := make([]int, 0)
 
 	for _, line := range input.Lines {
 		lineElems := strings.Split(line, "   ")
@@ -21,11 +25,25 @@ func Day1(input *utils.Input) error {
 		if err != nil {
 			return err
 		}
-		arr1 = append(arr1, int1)
-		arr2 = append(arr2, int2)
+		arr1 = append(arr1, int(int1))
+		arr2 = append(arr2, int(int2))
 	}
 
+	slices.SortFunc(arr1, func(a, b int) int {
+		return a - b
+	})
+	slices.SortFunc(arr2, func(a, b int) int {
+		return a - b
+	})
+
+	zip := lo.Zip2(arr1, arr2)
 	diffTotal := 0
-	// sorted1 :=
+	for _, tup := range zip {
+		diff := math.Abs(float64(tup.A) - float64(tup.B))
+		diffTotal += int(diff)
+	}
+
+	fmt.Println("Total Distance between lists: ", diffTotal)
+
 	return nil
 }
