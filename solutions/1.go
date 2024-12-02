@@ -29,6 +29,13 @@ func Day1(input *utils.Input) error {
 		arr2 = append(arr2, int(int2))
 	}
 
+	part1(arr1, arr2)
+	part2(arr1, arr2)
+
+	return nil
+}
+
+func part1(arr1, arr2 []int) {
 	slices.SortFunc(arr1, func(a, b int) int {
 		return a - b
 	})
@@ -43,7 +50,28 @@ func Day1(input *utils.Input) error {
 		diffTotal += int(diff)
 	}
 
-	fmt.Println("Total Distance between lists: ", diffTotal)
+	fmt.Println("Total Distance between lists:", diffTotal)
+}
 
-	return nil
+func part2(arr1, arr2 []int) {
+	totalSimilarityScore := 0
+
+	occurrenceMap := map[int]int{}
+	for _, num := range arr2 {
+		if occurrence, found := occurrenceMap[num]; !found {
+			occurrenceMap[num] = 1
+		} else {
+			occurrenceMap[num] = occurrence + 1
+		}
+	}
+
+	for _, num := range arr1 {
+		if occurrence, found := occurrenceMap[num]; !found {
+			continue
+		} else {
+			totalSimilarityScore += num * occurrence
+		}
+	}
+
+	fmt.Println("Total similarity score:", totalSimilarityScore)
 }
