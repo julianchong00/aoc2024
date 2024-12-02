@@ -29,13 +29,13 @@ func Day1(input *utils.Input) error {
 		arr2 = append(arr2, int(int2))
 	}
 
-	part1(arr1, arr2)
-	part2(arr1, arr2)
+	day1part1(arr1, arr2)
+	day2part2(arr1, arr2)
 
 	return nil
 }
 
-func part1(arr1, arr2 []int) {
+func day1part1(arr1, arr2 []int) {
 	slices.SortFunc(arr1, func(a, b int) int {
 		return a - b
 	})
@@ -53,7 +53,7 @@ func part1(arr1, arr2 []int) {
 	fmt.Println("Total Distance between lists:", diffTotal)
 }
 
-func part2(arr1, arr2 []int) {
+func day2part2(arr1, arr2 []int) {
 	totalSimilarityScore := 0
 
 	occurrenceMap := map[int]int{}
