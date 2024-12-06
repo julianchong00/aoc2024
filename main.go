@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	day := 2
+	day := 3
 	filename := fmt.Sprintf("inputs/%d.txt", day)
 
 	input, err := utils.ReadInput(filename)
@@ -17,7 +17,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	err = solutions.Day2(input)
+	err = solutions.Day3(input)
 	if err != nil {
 		log.Fatal(err)
 	}
